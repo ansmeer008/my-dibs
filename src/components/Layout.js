@@ -10,6 +10,7 @@ export default function Layout({ children }) {
           display: flex;
           justify-content: center;
           align-items: center;
+          width: 100%;
         }
       `}</style>
     </>
