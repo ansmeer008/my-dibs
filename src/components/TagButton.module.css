@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: transparent;
+}
+
+.buttons {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.buttons:hover {
+  color: var(--main-yellow);
+}
