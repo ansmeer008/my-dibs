@@ -1,4 +1,5 @@
 .new {
+  cursor: pointer;
   width: 80px;
   height: 40px;
   border-radius: 30px;
@@ -15,15 +16,39 @@
 }
 
 .fix {
+  cursor: pointer;
   border-radius: 30px;
   border: none;
   background-color: var(--button-blue);
   color: white;
+  width: 132px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
 }
 
 .delete {
+  cursor: pointer;
   border-radius: 30px;
   border: none;
   background-color: var(--button-red);
   color: white;
+  width: 132px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.back {
+  cursor: pointer;
+  width: 80px;
+  height: 48px;
+  font-size: 32px;
+  background-color: var(--dropdown-grey);
+  border-radius: 20px;
+  border: none;
+  color: black;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
 }

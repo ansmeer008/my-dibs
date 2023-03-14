@@ -8,20 +8,26 @@ function NewButton({ name, buttonHandelr }) {
   );
 }
 
-function FixButton({ name, buttonHandelr }) {
+function FixButton({ buttonHandelr }) {
   return (
     <button className={classes.fix} onClick={buttonHandelr}>
-      {name}
+      Fix
     </button>
   );
 }
 
-function DeleteButton({ name, buttonHandelr }) {
+function DeleteButton({ buttonHandelr }) {
   return (
     <button className={classes.delete} onClick={buttonHandelr}>
-      {name}
+      Delete
     </button>
   );
 }
 
-export { NewButton, FixButton, DeleteButton };
+function BackButton({ buttonHandler }) {
+  return (
+    <button className={classes.back} onClick={buttonHandler}>{`<`}</button>
+  );
+}
+
+export { NewButton, FixButton, DeleteButton, BackButton };
