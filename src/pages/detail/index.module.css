@@ -74,6 +74,11 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.buttonContainer > button {
+  margin: 0 16px 0 16px;
 }
