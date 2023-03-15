@@ -67,7 +67,7 @@ export default function Detail() {
           </div>
         </div>
         <div className={classes.buttonContainer}>
-          <EditButton />
+          <EditButton buttonHandelr={() => router.replace("/editItem")} />
           <DeleteButton />
         </div>
       </div>
