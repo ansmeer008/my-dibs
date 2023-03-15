@@ -3,6 +3,7 @@ import { NewButton } from "../components/Button";
 import TagButton from "../components/TagButton";
 import classes from "./index.module.css";
 import { TbFilter } from "react-icons/tb";
+import { useRouter } from "next/router";
 
 const DummyData = [
   {
@@ -140,11 +141,13 @@ const DummyData = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
-        <NewButton name="New" />
-        <TagButton />
+        <NewButton buttonHandelr={() => router.push("/newItem")} />
+        <TagButton data={DummyData} />
         <TbFilter className={classes.filterIcon} />
       </div>
       <ItemList items={DummyData} />
