@@ -1,5 +1,7 @@
-import Link from "next/link";
+import classes from "./index.module.css";
+import { useRouter } from "next/router";
 
 export default function Detail() {
-  return <div className="container"></div>;
+  const router = useRouter();
+  return <div className={classes.container}></div>;
 }
