@@ -8,12 +8,13 @@
 }
 
 .container > button {
+  cursor: pointer;
   border: none;
   background-color: transparent;
   font-size: 16px;
   font-weight: 600;
 }
 
-.buttons:hover {
+.container > button:hover {
   color: var(--main-yellow);
 }
