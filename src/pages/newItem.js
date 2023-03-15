@@ -2,9 +2,16 @@ import classes from "./newItem.module.css";
 import { BackButton, ConfirmButton } from "../components/Button";
 import { TbCamera } from "react-icons/tb";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import ConfirmModal from "@/components/modal/ConfirmModal";
 
 export default function NewItem() {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  function confirmHandler() {
+    setIsOpen((prev) => !prev);
+  }
 
   return (
     <div className={classes.container}>
@@ -45,9 +52,10 @@ export default function NewItem() {
           </div>
         </div>
         <div className={classes.buttonContainer}>
-          <ConfirmButton />
+          <ConfirmButton buttonHandler={confirmHandler} />
         </div>
       </div>
+      {isOpen ? <ConfirmModal handler={confirmHandler} /> : null}
     </div>
   );
 }
