@@ -4,6 +4,8 @@ import TagButton from "../components/TagButton";
 import classes from "./index.module.css";
 import { TbFilter } from "react-icons/tb";
 import { useRouter } from "next/router";
+import DropDown from "@/components/DropDown";
+import { useState } from "react";
 
 const DummyData = [
   {
@@ -141,14 +143,22 @@ const DummyData = [
 ];
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  function filterHandler() {
+    setIsOpen((prev) => !prev);
+  }
 
   return (
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
         <NewButton buttonHandelr={() => router.push("/newItem")} />
         <TagButton data={DummyData} />
-        <TbFilter className={classes.filterIcon} />
+        <div className={classes.filterContainer}>
+          <TbFilter className={classes.filterIcon} onClick={filterHandler} />
+          {isOpen ? <DropDown /> : null}
+        </div>
       </div>
       <ItemList items={DummyData} />
     </div>

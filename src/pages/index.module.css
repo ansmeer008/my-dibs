@@ -30,6 +30,10 @@
   }
 }
 
+.filterContainer {
+  position: relative;
+}
+
 .filterIcon {
   font-size: 32px;
   text-align: center;
