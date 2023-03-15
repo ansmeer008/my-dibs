@@ -1,9 +1,9 @@
 import classes from "./Button.module.css";
 
-function NewButton({ name, buttonHandelr }) {
+function NewButton({ buttonHandelr }) {
   return (
     <button className={classes.new} onClick={buttonHandelr}>
-      {name}
+      New
     </button>
   );
 }
