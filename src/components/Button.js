@@ -8,10 +8,10 @@ function NewButton({ name, buttonHandelr }) {
   );
 }
 
-function FixButton({ buttonHandelr }) {
+function EditButton({ buttonHandelr }) {
   return (
-    <button className={classes.fix} onClick={buttonHandelr}>
-      Fix
+    <button className={classes.edit} onClick={buttonHandelr}>
+      Edit
     </button>
   );
 }
@@ -30,4 +30,12 @@ function BackButton({ buttonHandler }) {
   );
 }
 
-export { NewButton, FixButton, DeleteButton, BackButton };
+function ConfirmButton({ buttonHandler }) {
+  return (
+    <button className={classes.confirm} onClick={buttonHandler}>
+      Confirm
+    </button>
+  );
+}
+
+export { NewButton, EditButton, DeleteButton, BackButton, ConfirmButton };
