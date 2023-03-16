@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import classes from "./index.module.css";
 import { BackButton, EditButton, DeleteButton } from "../../components/Button";
 import HeartScore from "@/components/detail/HeartScore";
+import ItemTags from "@/components/detail/ItemTag";
 
 const DetailData = {
   id: "1",
@@ -51,9 +52,7 @@ export default function Detail() {
             </div>
             <div>
               <span>Tag. </span>
-              <span className={classes.userText}>
-                태그 컴포넌트로 교체 필요
-              </span>
+              <ItemTags tagText={DetailData.tag} />
             </div>
             <div>
               <span>Score. </span>
