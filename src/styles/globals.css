@@ -1,17 +1,25 @@
 :root {
   --main-yellow: #ffcf24;
-  --dark-bg: #3d3c3c;
+  --bg-color: white;
   --button-red: #a03f2a;
   --button-blue: #445b95;
   --button-green: #49a02a;
   --dropdown-grey: #b7b5b5;
   --score-pink: #ff78c1;
+  --basic-font: black;
+}
+
+html.dark {
+  --bg-color: #3d3c3c;
+  --basic-font: white;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
+  background-color: var(--bg-color);
+  color: var(--basic-font);
 }
 
 body {
@@ -32,6 +40,6 @@ body {
 }
 
 a {
-  color: black;
+  color: var(----basic-font);
   text-decoration: none;
 }
