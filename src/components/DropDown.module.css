@@ -1,7 +1,5 @@
 .container {
   background-color: var(--dropdown-grey);
-  font-size: 20px;
-  font-weight: 700;
   border-radius: 10px;
   width: 100px;
   height: 100px;
@@ -15,15 +13,21 @@
   right: 0px;
 }
 
-.container > div:first-child {
-  border-bottom: 2px solid black;
-  padding-bottom: 8px;
+.container > button {
+  font-size: 20px;
+  font-weight: 700;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   width: 100%;
   text-align: center;
 }
 
-.container > div:last-child {
+.container > button:first-child {
+  border-bottom: 2px solid black;
+  padding-bottom: 8px;
+}
+
+.container > button:last-child {
   padding-top: 16px;
-  width: 100%;
-  text-align: center;
 }
