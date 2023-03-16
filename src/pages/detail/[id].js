@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import classes from "./index.module.css";
 import { BackButton, EditButton, DeleteButton } from "../../components/Button";
+import HeartScore from "@/components/detail/HeartScore";
 
 const DetailData = {
   id: "1",
@@ -56,9 +57,7 @@ export default function Detail() {
             </div>
             <div>
               <span>Score. </span>
-              <span className={classes.userText}>
-                스코어 컴포넌트로 교체 필요
-              </span>
+              <HeartScore rate={DetailData.score} />
             </div>
             <div>
               <span>Memo. </span>
