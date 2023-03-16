@@ -8,7 +8,13 @@
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%), 0 1px 3px rgb(0 0 0 / 8%);
 }
 
+.header > a {
+  width: 90%;
+}
+
 .title {
+  padding-left: 52px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,4 +22,18 @@
 
 .icon {
   font-size: 32px;
+}
+
+.toggleContainer {
+  display: flex;
+  width: 10%;
+  height: 100%;
+  justify-content: flex-end;
+  padding: 36px 8px 8px 8px;
+}
+
+@media (max-width: 768px) {
+  .toggleContainer {
+    padding: 24px 4px 4px 4px;
+  }
 }

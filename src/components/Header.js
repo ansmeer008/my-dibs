@@ -1,6 +1,7 @@
 import classes from "./Header.module.css";
 import Link from "next/link";
 import { TbHandFinger } from "react-icons/tb";
+import Toggle from "./Toggle";
 
 export default function Header() {
   return (
@@ -13,6 +14,9 @@ export default function Header() {
           </div>
         </div>
       </Link>
+      <div className={classes.toggleContainer}>
+        <Toggle />
+      </div>
     </header>
   );
 }
