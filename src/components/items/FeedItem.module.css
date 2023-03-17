@@ -58,3 +58,9 @@
 .item:hover .textContainer {
   display: flex;
 }
+
+@media (max-width: 768px) {
+  .item {
+    width: 100%;
+  }
+}
