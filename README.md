@@ -2,8 +2,6 @@
 
 my-dibs는 내가 찜한 쇼핑 목록을 저장하는 어플리케이션입니다.
 
-![figma](https://www.figma.com/file/haIvV6NDkLI06Ma0kYtWHe/My_Dibs!?node-id=1-2&t=WZAf7HXS9X2pl6mZ-4)
-
 # Goal
 
 - 새롭게 학습한 Next.js를 이용해 어플리케이션을 제작하며 이해도 높이기
