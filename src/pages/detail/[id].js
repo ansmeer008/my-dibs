@@ -25,7 +25,7 @@ export default function Detail() {
   return (
     <div className={classes.container}>
       <div className={classes.backButton}>
-        <BackButton buttonHandler={() => router.push("/")} />
+        <BackButton buttonHandler={() => router.push("/feed")} />
       </div>
       <div className={classes.itemContiner}>
         <div className={classes.itemContents}>
