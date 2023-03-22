@@ -1,42 +1,75 @@
 .container {
-  width: 80%;
+  width: 90%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
-.buttonContainer {
-  width: 100%;
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 0 24px 0;
+  align-items: center;
+  max-width: 1048px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  width: 90%;
+  min-height: 400px;
+  height: 100%;
+  background-image: url("https://img.freepik.com/free-photo/minimal-shopping-cart-shopping-concept-orange-background-3d-rendering_56104-1396.jpg?w=1800&t=st=1679467124~exp=1679467724~hmac=8dccf8c9de606f98e063d8eb3659dd5e819d91b313f8a4b78b6c85dac52455b2");
+  background-size: cover;
+  background-position: center;
+}
+
+.itemContainer > span {
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+}
+
+.itemContainer > img {
+  width: 60%;
+  border-radius: 50%;
+}
+
+.btnContainer {
+  width: 50%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
-  .container {
-    margin-top: 50px;
+  .btnContainer {
+    width: 70%;
   }
+  .btnContainer > button {
+    font-weight: 500;
+    font-size: 20px;
+    width: 120px;
+    height: 40px;
+  }
+}
 
-  .buttonContainer {
+@media (max-width: 480px) {
+  .btnContainer {
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
   }
 
-  .buttonContainer > div {
-    margin-top: 16px;
-    margin-bottom: 8px;
+  .btnContainer > button:first-child {
+    margin-bottom: 16px;
   }
-}
 
-.filterContainer {
-  position: relative;
-}
-
-.filterIcon {
-  font-size: 32px;
-  text-align: center;
-  padding-top: 8px;
-  cursor: pointer;
+  .itemContainer > span {
+    font-size: 16px;
+    font-weight: 700;
+  }
 }
