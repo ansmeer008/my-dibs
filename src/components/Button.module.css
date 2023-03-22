@@ -65,3 +65,29 @@
   font-weight: 700;
   box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
 }
+
+.login {
+  cursor: pointer;
+  border-radius: 30px;
+  border: none;
+  background-color: var(--button-green);
+  color: white;
+  width: 132px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.signup {
+  cursor: pointer;
+  border-radius: 30px;
+  border: none;
+  background-color: var(--button-blue);
+  color: white;
+  width: 132px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
+}

@@ -38,4 +38,28 @@ function ConfirmButton({ buttonHandler }) {
   );
 }
 
-export { NewButton, EditButton, DeleteButton, BackButton, ConfirmButton };
+function LoginButton({ buttonHandler }) {
+  return (
+    <button className={classes.login} onClick={buttonHandler}>
+      Login
+    </button>
+  );
+}
+
+function SignUpButton({ buttonHandler }) {
+  return (
+    <button className={classes.signup} onClick={buttonHandler}>
+      Signup
+    </button>
+  );
+}
+
+export {
+  NewButton,
+  EditButton,
+  DeleteButton,
+  BackButton,
+  ConfirmButton,
+  LoginButton,
+  SignUpButton,
+};
