@@ -15,4 +15,5 @@ my-dibs는 내가 찜한 쇼핑 목록을 저장하는 어플리케이션입니�
 
 # Timeline
 
-- 3월 13일 ~ 3월 17일 : 마크업 진행중
+- 3월 13일 ~ 3월 17일 : FeedPage, DetailPage, NewItemPage, EditItemPage 마크업
+- 3월 20일 ~ 3월 22일 : LoginPage, SignUpPage, LandingPage 마크업
