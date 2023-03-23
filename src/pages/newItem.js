@@ -5,28 +5,33 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ConfirmModal from "@/components/modal/ConfirmModal";
 
-const DetailData = {
-  image:
-    "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dCUyMHNoaXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  title: "무난한 티셔츠",
-  price: 18000,
-  tag: "clothes",
-  score: 4,
-  memo: "그냥 여기저기 입기 좋은 무난한 티셔츠",
-  url: "www.gwliee.com",
-};
-
-//TODO : 더미 데이터 변경 필요
-//TODO : 리다이렉션 추가 필요
+//TODO: post 할 경우 두 개씩 생성되는 문제 고치기
+//TODO: score 눌러서 입력할 수 있도록 바꾸기
+//TODO: initial state가 뜨는 것 고치기
+//TODO: 이미지 로더 구현
 
 export default function NewItem() {
   const [isOpen, setIsOpen] = useState(false);
+  const [itemData, setItemData] = useState({
+    image: "",
+    title: "",
+    price: 0,
+    tag: "",
+    score: 0,
+    memo: "",
+    url: "",
+  });
   const router = useRouter();
+
+  function inputHandler(e) {
+    const { name, value } = e.target;
+    setItemData({ ...itemData, [name]: value });
+  }
 
   async function confirmHandler() {
     const response = await fetch("/api/new-item", {
       method: "POST",
-      body: JSON.stringify(DetailData),
+      body: JSON.stringify(itemData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,6 +39,7 @@ export default function NewItem() {
     const data = await response.json();
     console.log(data);
     setIsOpen((prev) => !prev);
+    router.push("/feed");
   }
 
   return (
@@ -50,27 +56,51 @@ export default function NewItem() {
           <div className={classes.textContainer}>
             <div>
               <label>Name. </label>
-              <input></input>
+              <input
+                name="title"
+                onChange={inputHandler}
+                value={itemData.title}
+              ></input>
             </div>
             <div>
               <label>Price. </label>
-              <input></input>
+              <input
+                name="price"
+                onChange={inputHandler}
+                value={itemData.price}
+              ></input>
             </div>
             <div>
               <label>Url. </label>
-              <input></input>
+              <input
+                name="url"
+                onChange={inputHandler}
+                value={itemData.url}
+              ></input>
             </div>
             <div>
               <label>Tag. </label>
-              <input></input>
+              <input
+                name="tag"
+                onChange={inputHandler}
+                value={itemData.tag}
+              ></input>
             </div>
             <div>
               <label>Score. </label>
-              <input></input>
+              <input
+                name="score"
+                onChange={inputHandler}
+                value={itemData.score}
+              ></input>
             </div>
             <div>
               <label>Memo. </label>
-              <textarea></textarea>
+              <textarea
+                name="memo"
+                onChange={inputHandler}
+                value={itemData.memo}
+              ></textarea>
             </div>
           </div>
         </div>
