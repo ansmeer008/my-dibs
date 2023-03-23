@@ -20,7 +20,7 @@ export default function Home(props) {
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
         <NewButton buttonHandelr={() => router.push("/newItem")} />
-        <TagButton data={DummyData} />
+        <TagButton />
         <div className={classes.filterContainer}>
           <TbFilter className={classes.filterIcon} onClick={filterHandler} />
           {isOpen ? <DropDown /> : null}

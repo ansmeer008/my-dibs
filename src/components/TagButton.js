@@ -1,6 +1,6 @@
 import classes from "./TagButton.module.css";
 
-export default function TagButton({ data }) {
+export default function TagButton() {
   return (
     <div className={classes.container}>
       <button>All</button>
