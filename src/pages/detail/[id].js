@@ -3,24 +3,13 @@ import classes from "./index.module.css";
 import { BackButton, EditButton, DeleteButton } from "../../components/Button";
 import HeartScore from "@/components/detail/HeartScore";
 import ItemTags from "@/components/detail/ItemTag";
+import { MongoClient, ObjectId } from "mongodb";
 
-const DetailData = {
-  id: "1",
-  image:
-    "https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dCUyMHNoaXJ0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  title: "무난한 티셔츠",
-  price: 18000,
-  tag: "clothes",
-  score: 4,
-  memo: "그냥 여기저기 입기 좋은 무난한 티셔츠",
-  url: "www.gwliee.com",
-};
-
-export default function Detail() {
+export default function Detail(props) {
   const router = useRouter();
 
   //경로에서 id 받아옴
-  const itemId = router.query.itemId;
+  // const itemId = router.query.itemId;
 
   return (
     <div className={classes.container}>
@@ -32,35 +21,35 @@ export default function Detail() {
           <div className={classes.imgContainer}>
             <img
               className={classes.image}
-              src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGNhdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+              src="https://cdn-icons-png.flaticon.com/512/778/778167.png?w=996&t=st=1679578980~exp=1679579580~hmac=0ffb2e17cddf2cba8feb0f50852ea0f1be79d55cfb7b480d4fdd3ff19b84f3e7"
             />
           </div>
           <div className={classes.textContainer}>
             <div>
               <span>Name. </span>
-              <span className={classes.userText}>{DetailData.title}</span>
+              <span className={classes.userText}>{props.itemData.title}</span>
             </div>
             <div>
               <span>Price. </span>
-              <span className={classes.userText}>{DetailData.price}</span>
+              <span className={classes.userText}>{props.itemData.price}</span>
             </div>
             <div>
               <span>Url. </span>
-              <a className={classes.userText} href={DetailData.url}>
-                {DetailData.url}
+              <a className={classes.userText} href={props.itemData.url}>
+                {props.itemData.url}
               </a>
             </div>
             <div>
               <span>Tag. </span>
-              <ItemTags tagText={DetailData.tag} />
+              <ItemTags tagText={props.itemData.tag} />
             </div>
             <div>
               <span>Score. </span>
-              <HeartScore rate={DetailData.score} />
+              <HeartScore rate={props.itemData.score} />
             </div>
             <div>
               <span>Memo. </span>
-              <span className={classes.userText}>{DetailData.memo}</span>
+              <span className={classes.userText}>{props.itemData.memo}</span>
             </div>
           </div>
         </div>
@@ -71,4 +60,51 @@ export default function Detail() {
       </div>
     </div>
   );
+}
+
+export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://ansmeer008:muGcOF9tH71qrB0e@cluster0.rmwt3pc.mongodb.net/items?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const itemsCollection = db.collection("items");
+
+  const items = await itemsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
+
+  return {
+    fallback: false,
+    paths: items.map((item) => ({ params: { id: item._id.toString() } })),
+  };
+}
+
+export async function getStaticProps(context) {
+  const itemId = context.params.id;
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://ansmeer008:muGcOF9tH71qrB0e@cluster0.rmwt3pc.mongodb.net/items?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const itemsCollection = db.collection("items");
+
+  const selectedItem = await itemsCollection.findOne({
+    _id: new ObjectId(itemId),
+  });
+
+  client.close();
+
+  return {
+    props: {
+      itemData: {
+        id: selectedItem._id.toHexString(),
+        title: selectedItem.title,
+        tag: selectedItem.tag,
+        prcie: selectedItem.price,
+        score: selectedItem.score,
+        url: selectedItem.url,
+        image: selectedItem.image,
+      },
+    },
+  };
 }
