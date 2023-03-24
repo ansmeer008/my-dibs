@@ -1,9 +1,17 @@
 import classes from "./Header.module.css";
 import Link from "next/link";
-import { TbHandFinger } from "react-icons/tb";
+import { TbHandFinger, TbLockOpen } from "react-icons/tb";
 import Toggle from "./Toggle";
+import { useCurrentUser } from "src/hooks";
 
 export default function Header() {
+  const [user, { mutate }] = useCurrentUser();
+  async function handleLogout() {
+    await fetch("/api/auth", {
+      method: "DELETE",
+    });
+    mutate(null);
+  }
   const isLogin = true;
 
   return (
@@ -16,8 +24,13 @@ export default function Header() {
           </div>
         </div>
       </Link>
-      <div className={classes.toggleContainer}>
-        <Toggle />
+      <div className={classes.buttonContainer}>
+        <div className={classes.logout} onClick={handleLogout}>
+          <TbLockOpen />
+        </div>
+        <div className={classes.toggleContainer}>
+          <Toggle />
+        </div>
       </div>
     </header>
   );
