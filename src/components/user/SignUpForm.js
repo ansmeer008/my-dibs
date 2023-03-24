@@ -1,25 +1,93 @@
 import classes from "./sign.module.css";
 import { ConfirmButton } from "../Button";
+import { useEffect, useState } from "react";
 
-export default function SignUpForm() {
+export default function SignUpForm({ signUpData, setSignUpData }) {
+  const [confirmPassword, setConfirmPassword] = useState(false);
+
+  function inputHandler(e) {
+    const { name, value } = e.target;
+    setSignUpData({ ...signUpData, [name]: value });
+  }
+
+  function validateHandler() {
+    if (signUpData.password === signUpData.passwordConfirm) {
+      setConfirmPassword(true);
+    } else {
+      setConfirmPassword(false);
+    }
+  }
+
+  function validation(value, type) {
+    const usernameExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+    const passwordExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+
+    switch (type) {
+      case "username":
+        return usernameExp.test(value);
+      case "password":
+        return passwordExp.test(value);
+      default:
+        return;
+    }
+  }
+
+  useEffect(() => {
+    validateHandler();
+  }, [signUpData.password, signUpData.passwordConfirm]);
+
   return (
     <div className={classes.container}>
       <span>SignUp</span>
       <div className={classes.inputContainer}>
         <div>
           <label>Username</label>
-          <input></input>
-          <span>only english and number available</span>
+          <input
+            name="username"
+            onChange={inputHandler}
+            value={signUpData.username}
+          ></input>
+          <span
+            className={
+              validation(signUpData.username, "username")
+                ? classes.validationText
+                : undefined
+            }
+          >
+            username should be english with number
+          </span>
         </div>
         <div>
           <label>Password</label>
-          <input></input>
-          <span>minimum 8 character</span>
+          <input
+            name="password"
+            type="password"
+            onChange={inputHandler}
+            value={signUpData.password}
+          ></input>
+          <span
+            className={
+              validation(signUpData.password, "password")
+                ? classes.validationText
+                : undefined
+            }
+          >
+            minimum 8 character, only english with number available
+          </span>
         </div>
         <div>
           <label>Password Confirm</label>
-          <input></input>
-          <span>Password Confirm should match Password</span>
+          <input
+            name="passwordConfirm"
+            type="password"
+            onChange={inputHandler}
+            value={signUpData.passwordConfirm}
+          ></input>
+          <span
+            className={confirmPassword ? classes.validationText : undefined}
+          >
+            Password Confirm should match Password
+          </span>
         </div>
       </div>
       <ConfirmButton />
