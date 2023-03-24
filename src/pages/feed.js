@@ -32,9 +32,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://ansmeer008:muGcOF9tH71qrB0e@cluster0.rmwt3pc.mongodb.net/items?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(`${process.env.MONGODB_URI}`);
   const db = client.db();
   const itemsCollection = db.collection("items");
 
