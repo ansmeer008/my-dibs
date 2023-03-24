@@ -12,3 +12,16 @@
     flex-direction: column;
   }
 }
+
+.blankText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  border-radius: 10px;
+  border: dotted 2px;
+  border-color: var(--blank-font);
+  padding: 100px;
+  margin-top: 80px;
+  color: var(--blank-font);
+}

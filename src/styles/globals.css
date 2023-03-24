@@ -7,11 +7,13 @@
   --dropdown-grey: #b7b5b5;
   --score-pink: #ff78c1;
   --basic-font: black;
+  --blank-font: rgba(0, 0, 0, 0.494);
 }
 
 html.dark {
   --bg-color: #3d3c3c;
   --basic-font: white;
+  --blank-font: rgba(255, 255, 255, 0.468);
 }
 
 html,
