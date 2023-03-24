@@ -1,9 +1,11 @@
 import classes from "./sign.module.css";
 import { ConfirmButton } from "../Button";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function SignUpForm({ signUpData, setSignUpData }) {
   const [confirmPassword, setConfirmPassword] = useState(false);
+  const router = useRouter();
 
   function inputHandler(e) {
     const { name, value } = e.target;
@@ -29,6 +31,28 @@ export default function SignUpForm({ signUpData, setSignUpData }) {
         return passwordExp.test(value);
       default:
         return;
+    }
+  }
+
+  async function submitHandler(e) {
+    if (
+      validation(signUpData.username, "username") &&
+      validation(signUpData.password, "password") &&
+      confirmPassword
+    ) {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signUpData),
+      });
+
+      if (res.status === 201) {
+        const userObj = await res.json();
+        console.log(userObj);
+        router.replace("/login");
+      } else {
+        console.log(await res.text());
+      }
     }
   }
 
@@ -90,7 +114,7 @@ export default function SignUpForm({ signUpData, setSignUpData }) {
           </span>
         </div>
       </div>
-      <ConfirmButton />
+      <ConfirmButton buttonHandler={submitHandler} />
     </div>
   );
 }
