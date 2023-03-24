@@ -3,8 +3,8 @@ import { BackButton, ConfirmButton } from "../components/Button";
 import { TbCamera } from "react-icons/tb";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ConfirmModal from "@/components/modal/ConfirmModal";
-import Seo from "@/components/Seo";
+import ConfirmModal from "../components/modal/ConfirmModal";
+import Seo from "../components/Seo";
 
 export default function EditItem() {
   const [isOpen, setIsOpen] = useState(false);

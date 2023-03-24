@@ -1,6 +1,6 @@
 import classes from "./Toggle.module.css";
 import { useState } from "react";
-import { useDarkMode } from "@/context/DarkModeContext";
+import { useDarkMode } from "../context/DarkModeContext";
 
 export default function Toggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();

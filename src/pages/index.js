@@ -1,7 +1,7 @@
 import classes from "./index.module.css";
-import { LoginButton, SignUpButton } from "@/components/Button";
+import { LoginButton, SignUpButton } from "../components/Button";
 import { useRouter } from "next/router";
-import Seo from "@/components/Seo";
+import Seo from "../components/Seo";
 
 export default function Start() {
   const router = useRouter();

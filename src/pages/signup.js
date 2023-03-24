@@ -1,5 +1,5 @@
-import Seo from "@/components/Seo";
-import SignUpForm from "@/components/user/SignUpForm";
+import Seo from "../components/Seo";
+import SignUpForm from "../components/user/SignUpForm";
 import { useState } from "react";
 import classes from "./login.module.css";
 

@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import classes from "./index.module.css";
 import { BackButton, EditButton, DeleteButton } from "../../components/Button";
-import HeartScore from "@/components/detail/HeartScore";
-import ItemTags from "@/components/detail/ItemTag";
+import HeartScore from "../components/detail/HeartScore";
+import ItemTags from "../components/detail/ItemTag";
 import { MongoClient, ObjectId } from "mongodb";
-import Seo from "@/components/Seo";
+import Seo from "../components/Seo";
 
 export default function Detail(props) {
   const router = useRouter();

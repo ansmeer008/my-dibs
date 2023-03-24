@@ -3,8 +3,8 @@ import { BackButton, ConfirmButton } from "../components/Button";
 import { TbCamera } from "react-icons/tb";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ConfirmModal from "@/components/modal/ConfirmModal";
-import Seo from "@/components/Seo";
+import ConfirmModal from "../components/modal/ConfirmModal";
+import Seo from "../components/Seo";
 
 //TODO: post 할 경우 두 개씩 생성되는 문제 고치기
 //TODO: score 눌러서 입력할 수 있도록 바꾸기

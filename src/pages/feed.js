@@ -4,7 +4,7 @@ import TagButton from "../components/TagButton";
 import classes from "./feed.module.css";
 import { TbFilter } from "react-icons/tb";
 import { useRouter } from "next/router";
-import DropDown from "@/components/DropDown";
+import DropDown from "../components/DropDown";
 import { useState } from "react";
 import { MongoClient } from "mongodb";
 
