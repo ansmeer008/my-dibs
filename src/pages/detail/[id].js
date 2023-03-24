@@ -4,6 +4,7 @@ import { BackButton, EditButton, DeleteButton } from "../../components/Button";
 import HeartScore from "@/components/detail/HeartScore";
 import ItemTags from "@/components/detail/ItemTag";
 import { MongoClient, ObjectId } from "mongodb";
+import Seo from "@/components/Seo";
 
 export default function Detail(props) {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function Detail(props) {
 
   return (
     <div className={classes.container}>
+      <Seo title={props.itemData.title} />
       <div className={classes.backButton}>
         <BackButton buttonHandler={() => router.push("/feed")} />
       </div>
