@@ -14,7 +14,12 @@ handler.post(passport.authenticate("local"), (req, res) => {
 
 //로그아웃
 handler.delete((req, res) => {
-  req.logout();
+  req.logout(function (err) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect("/");
+  });
   res.status(204).end();
 });
 
