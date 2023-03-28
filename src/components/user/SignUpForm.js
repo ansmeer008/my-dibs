@@ -49,7 +49,7 @@ export default function SignUpForm({ signUpData, setSignUpData }) {
       if (res.status === 201) {
         const userObj = await res.json();
         console.log(userObj);
-        router.replace("/login");
+        router.replace("/feed");
       } else {
         console.log(await res.text());
       }
