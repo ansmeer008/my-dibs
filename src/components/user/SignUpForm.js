@@ -2,10 +2,12 @@ import classes from "./sign.module.css";
 import { ConfirmButton } from "../Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useCurrentUser } from "src/hooks";
 
 export default function SignUpForm({ signUpData, setSignUpData }) {
   const [confirmPassword, setConfirmPassword] = useState(false);
   const router = useRouter();
+  const [user, { mutate }] = useCurrentUser();
 
   function inputHandler(e) {
     const { name, value } = e.target;
@@ -48,7 +50,7 @@ export default function SignUpForm({ signUpData, setSignUpData }) {
 
       if (res.status === 201) {
         const userObj = await res.json();
-        console.log(userObj);
+        mutate(userObj);
         router.replace("/feed");
       } else {
         console.log(await res.text());

@@ -1,9 +1,11 @@
 import { ConfirmButton } from "../Button";
 import classes from "./sign.module.css";
 import { useRouter } from "next/router";
+import { useCurrentUser } from "src/hooks";
 
 export default function LoginForm({ loginData, setLoginData }) {
   const router = useRouter();
+  const [user, { mutate }] = useCurrentUser();
 
   function inputHandler(e) {
     const { name, value } = e.target;
@@ -19,7 +21,7 @@ export default function LoginForm({ loginData, setLoginData }) {
 
     if (res.status === 200) {
       const userObj = await res.json();
-      console.log(userObj);
+      mutate(userObj);
       router.replace("/feed");
     } else {
       alert("incorrect username or password. Try Again!");
