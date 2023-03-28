@@ -3,14 +3,21 @@ import Link from "next/link";
 import { TbHandFinger, TbLockOpen } from "react-icons/tb";
 import Toggle from "./Toggle";
 import { useCurrentUser } from "src/hooks";
+import { useRouter } from "next/router";
 
 export default function Header() {
+  const router = useRouter();
   const [user, { mutate }] = useCurrentUser();
   async function handleLogout() {
-    await fetch("/api/auth", {
+    const res = await fetch("/api/auth", {
       method: "DELETE",
     });
-    mutate(null);
+    if (res.status === 204) {
+      mutate(null);
+      router.replace("/");
+    } else {
+      console.log(await res.text());
+    }
   }
 
   return (
