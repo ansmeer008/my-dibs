@@ -12,11 +12,10 @@ export default function Header() {
     });
     mutate(null);
   }
-  const isLogin = true;
 
   return (
     <header className={classes.header}>
-      <Link href={isLogin ? "/feed" : "/"}>
+      <Link href={user ? "/feed" : "/"}>
         <div className={classes.title}>
           <h1>My Dibs!</h1>
           <div className={classes.icon}>
@@ -26,7 +25,7 @@ export default function Header() {
       </Link>
       <div className={classes.buttonContainer}>
         <div className={classes.logout} onClick={handleLogout}>
-          <TbLockOpen />
+          {user ? <TbLockOpen /> : null}
         </div>
         <div className={classes.toggleContainer}>
           <Toggle />
