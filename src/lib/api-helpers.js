@@ -1,4 +1,5 @@
 const sensitiveFields = ["password"];
+
 export function extractUser(user) {
   if (!user) return null;
   const obj = {};

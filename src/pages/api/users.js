@@ -36,7 +36,7 @@ handler.post(async (req, res) => {
 
   //passportjs 모듈에서 제공하는 Login함수를 사용해 로그인
   //로그인 후 응답은 user 정보에서 extractUser를 이용해 패스워드 제거한 상태로 리턴
-  req.logIn(user, (err) => {
+  req.login(user, (err) => {
     if (err) throw err;
     res.status(201).json({
       user: extractUser(req.user),

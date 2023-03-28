@@ -7,12 +7,14 @@ const handler = nc();
 
 handler.use(all);
 
+//로그인
 handler.post(passport.authenticate("local"), (req, res) => {
   res.json({ user: extractUser(req.user) });
 });
 
+//로그아웃
 handler.delete((req, res) => {
-  req.logOut();
+  req.logout();
   res.status(204).end();
 });
 
