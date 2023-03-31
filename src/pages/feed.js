@@ -6,16 +6,18 @@ import { TbFilter } from "react-icons/tb";
 import { useRouter } from "next/router";
 import DropDown from "../components/DropDown";
 import { useState } from "react";
-import { MongoClient } from "mongodb";
+import { useCurrentUser } from "src/hooks";
 
-export default function Home(props) {
+export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user] = useCurrentUser();
   const router = useRouter();
 
   function filterHandler() {
     setIsOpen((prev) => !prev);
   }
 
+  console.log(user);
   return (
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
@@ -26,32 +28,19 @@ export default function Home(props) {
           {isOpen ? <DropDown /> : null}
         </div>
       </div>
-      <ItemList items={props.items} />
+      <ItemList items={user.itemlist} />
     </div>
   );
 }
 
-export async function getStaticProps() {
-  const client = await MongoClient.connect(`${process.env.MONGODB_URI}`);
-  const db = client.db();
-  const itemsCollection = db.collection("items");
-
-  const items = await itemsCollection.find().toArray();
-
-  client.close();
-
-  return {
-    props: {
-      items: items.map((item) => ({
-        title: item.title,
-        image: item.image,
-        price: item.price,
-        id: item._id.toString(),
-      })),
-    },
-    revalidate: 1,
-  };
-}
+// export async function getServerSideProps(context) {
+//   await all.run(context.req, context.res);
+//   const user = extractUser(
+//     await findUserById(context.req.db, context.params.userId)
+//   );
+//   if (!user) context.res.statusCode = 404;
+//   return { props: { itemlist: user.itemlist } };
+// }
 
 // const DummyData = [
 //   {
