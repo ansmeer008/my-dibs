@@ -1,27 +1,44 @@
-import { MongoClient } from "mongodb";
+import nc from "next-connect";
+import { all } from "../../middlewares/index";
+import { insertUser, findUserById, updateUserById } from "../../db/index";
+import { extractUser } from "src/lib/api-helpers";
 
-// 이 파일의 Url : /api/item
-//위 url로 요청이 보내지면 아래 함수가 trigger 됨
-//if문 때문에 only POST 요청일 때만 trigger된다
+//next-connect 모듈은 nextjs에서 api라우팅을 쉽게 해주는 모듈
+const handler = nc();
 
-//item으로 통일 후, get 요청인지 post 요청인지 patch 요청인지에 따라 나눠서 item 데이터 관리하도록 할 것임
+handler.use(all);
 
-async function postNewItem(req, res) {
-  if (req.method === "POST") {
-    const data = req.body;
+//handler를 이용해 get 요청 후 itemlist 데이터 받아오기
+handler.get(async (req, res) => {
+  const { username } = JSON.parse(req.user);
+  const { itemlist } = await findUserByUsername(req.db, username);
+  res.json({ itemlist });
+});
 
-    const client = await MongoClient.connect(
-      "mongodb+srv://ansmeer008:muGcOF9tH71qrB0e@cluster0.rmwt3pc.mongodb.net/items?retryWrites=true&w=majority"
-    );
-    const db = client.db();
-    const itemsCollection = db.collection("items");
-    const result = await itemsCollection.insertOne(data);
-
-    console.log(result);
-    client.close();
-
-    res.status(201).json({ message: "item inserted!" });
+//새로운 아이템 생성 => 새로운 아이템 생성도 일종의 user 데이터에 대한 Patch 요청이다.
+handler.patch(async (req, res) => {
+  const { id, itemid, image, title, price, tag, score, memo, url } = req.body;
+  if (!id) {
+    res.status(401).end();
+    return;
   }
-}
 
-export default postNewItem;
+  let user = await findUserById(req.db, id);
+  user = await updateUserById(req.db, id, {
+    ...user,
+    itemlist: [
+      ...user.itemlist,
+      { itemid, image, title, price, tag, score, memo, url },
+    ],
+  });
+
+  res.json({ user: extractUser(user) });
+});
+
+//아이템 수정
+handler.patch(async (req, res) => {});
+
+//아이템 삭제
+handler.delete((req, res) => {});
+
+export default handler;

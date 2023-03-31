@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import ConfirmModal from "../components/modal/ConfirmModal";
 import Seo from "../components/Seo";
+import { useCurrentUser } from "src/hooks";
 
 //TODO: post 할 경우 두 개씩 생성되는 문제 고치기
 //TODO: score 눌러서 입력할 수 있도록 바꾸기
@@ -12,8 +13,11 @@ import Seo from "../components/Seo";
 //TODO: 이미지 로더 구현
 
 export default function NewItem() {
+  const [user] = useCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
   const [itemData, setItemData] = useState({
+    id: user._id,
+    itemid: "0",
     image: "",
     title: "",
     price: 0,
@@ -30,8 +34,8 @@ export default function NewItem() {
   }
 
   async function confirmHandler() {
-    const response = await fetch("/api/new-item", {
-      method: "POST",
+    const response = await fetch("/api/items", {
+      method: "PATCH",
       body: JSON.stringify(itemData),
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +44,7 @@ export default function NewItem() {
     const data = await response.json();
     console.log(data);
     setIsOpen((prev) => !prev);
-    router.push("/feed");
+    router.replace("/feed");
   }
 
   return (

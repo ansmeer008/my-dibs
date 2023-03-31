@@ -17,7 +17,6 @@ export default function Home() {
     setIsOpen((prev) => !prev);
   }
 
-  console.log(user);
   return (
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
