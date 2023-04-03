@@ -12,8 +12,8 @@ export default function ItemList({ items }) {
         items.map((item) => {
           return (
             <FeedItem
-              key={item.id}
-              id={item.id}
+              key={item.itemid}
+              id={item.itemid}
               image={item.image}
               title={item.title}
               price={item.price}
