@@ -4,31 +4,21 @@ import { BackButton, EditButton, DeleteButton } from "../../components/Button";
 import HeartScore from "../../components/detail/HeartScore";
 import ItemTags from "../../components/detail/ItemTag";
 import Seo from "../../components/Seo";
-import { useEffect, useState } from "react";
 import { all } from "../../middlewares/index";
-import { extractUser } from "../../lib/api-helpers";
-import { findUserById } from "../../db/index";
+import { findItemDetail } from "../../db/index";
 
-export default function Detail() {
-  const [itemData, setItemData] = useState({
-    image: "",
-    title: "",
-    price: 0,
-    tag: "",
-    score: "",
-    memo: "",
-    url: "",
-  });
+export default function Detail({ itemDetail }) {
   const router = useRouter();
-
-  //경로에서 id 받아옴
-  // const itemId = router.query.itemId;
 
   return (
     <div className={classes.container}>
-      <Seo title={itemData.title} />
+      <Seo title={itemDetail.title} />
       <div className={classes.backButton}>
-        <BackButton buttonHandler={() => router.push("/feed")} />
+        <BackButton
+          buttonHandler={() =>
+            router.push(`/feed/${localStorage.getItem("userId")}`)
+          }
+        />
       </div>
       <div className={classes.itemContiner}>
         <div className={classes.itemContents}>
@@ -41,29 +31,29 @@ export default function Detail() {
           <div className={classes.textContainer}>
             <div>
               <span>Name. </span>
-              <span className={classes.userText}>{itemData.title}</span>
+              <span className={classes.userText}>{itemDetail.title}</span>
             </div>
             <div>
               <span>Price. </span>
-              <span className={classes.userText}>{itemData.price}</span>
+              <span className={classes.userText}>{itemDetail.price}</span>
             </div>
             <div>
               <span>Url. </span>
-              <a className={classes.userText} href={itemData.url}>
-                {itemData.url}
+              <a className={classes.userText} href={itemDetail.url}>
+                {itemDetail.url}
               </a>
             </div>
             <div>
               <span>Tag. </span>
-              <ItemTags tagText={itemData.tag} />
+              <ItemTags tagText={itemDetail.tag} />
             </div>
             <div>
               <span>Score. </span>
-              <HeartScore rate={itemData.score} />
+              <HeartScore rate={itemDetail.score} />
             </div>
             <div>
               <span>Memo. </span>
-              <span className={classes.userText}>{itemData.memo}</span>
+              <span className={classes.userText}>{itemDetail.memo}</span>
             </div>
           </div>
         </div>
@@ -77,9 +67,10 @@ export default function Detail() {
 }
 
 export async function getServerSideProps(context) {
-  //**우선 현재 유저 정보를 받아와야 하고** => 이 부분이 중요한데... 현재 유저 정보를 어떻게 전달할까
-  //파라미터를 2개 사용하는 것도 가능할 것 같다.
-  //받아온 유저 정보를 이용해 유저 정보를 찾고,
-  //찾은 유저 정보에서 Context로 받은 파라미터 itemId를 또 받아서 detail 아이템을 찾아야 함.
-  return { props: { user } };
+  console.log(context.query.params);
+  const [userId, itemId] = context.query.params;
+  await all.run(context.req, context.res);
+  const itemDetail = await findItemDetail(context.req.db, userId, itemId);
+  if (!itemDetail) context.res.statusCode = 404;
+  return { props: { itemDetail: itemDetail[0] } };
 }
