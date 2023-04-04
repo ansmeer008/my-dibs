@@ -6,9 +6,10 @@ import { useState } from "react";
 import ConfirmModal from "../components/modal/ConfirmModal";
 import Seo from "../components/Seo";
 import { useCurrentUser } from "src/hooks";
+import { nanoid } from "nanoid";
 
 //TODO: post 할 경우 두 개씩 생성되는 문제 고치기
-//TODO: score 눌러서 입력할 수 있도록 바꾸기
+//TODO: heart score 눌러서 입력할 수 있도록 바꾸기
 //TODO: initial state가 뜨는 것 고치기
 //TODO: 이미지 로더 구현
 
@@ -17,7 +18,6 @@ export default function NewItem() {
   const [isOpen, setIsOpen] = useState(false);
   const [itemData, setItemData] = useState({
     id: user._id,
-    itemid: "0",
     image: "",
     title: "",
     price: 0,
@@ -36,7 +36,7 @@ export default function NewItem() {
   async function confirmHandler() {
     const response = await fetch("/api/items", {
       method: "PATCH",
-      body: JSON.stringify(itemData),
+      body: JSON.stringify({ ...itemData, itemid: nanoid(6) }),
       headers: {
         "Content-Type": "application/json",
       },
