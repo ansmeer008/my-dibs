@@ -22,8 +22,9 @@ export default function LoginForm({ loginData, setLoginData }) {
     if (res.status === 200) {
       const userObj = await res.json();
       mutate(userObj);
-      localStorage.setItem("userId", userObj._id);
-      router.replace("/feed");
+      console.log(userObj);
+      localStorage.setItem("userId", userObj.user._id);
+      router.replace(`/feed/${userObj.user._id}`);
     } else {
       alert("incorrect username or password. Try Again!");
     }

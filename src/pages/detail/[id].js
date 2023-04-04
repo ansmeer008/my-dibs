@@ -16,7 +16,11 @@ export default function Detail(props) {
     <div className={classes.container}>
       <Seo title={props.itemData.title} />
       <div className={classes.backButton}>
-        <BackButton buttonHandler={() => router.push("/feed")} />
+        <BackButton
+          buttonHandler={() =>
+            router.push(`/feed/${localStorage.getItem("userId")}`)
+          }
+        />
       </div>
       <div className={classes.itemContiner}>
         <div className={classes.itemContents}>

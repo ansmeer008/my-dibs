@@ -44,7 +44,7 @@ export default function NewItem() {
     const data = await response.json();
     console.log(data);
     setIsOpen((prev) => !prev);
-    router.replace("/feed");
+    router.replace(`/feed/${localStorage.getItem("userId")}`);
   }
 
   return (

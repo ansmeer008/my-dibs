@@ -56,7 +56,8 @@ export default function SignUpForm() {
       if (res.status === 201) {
         const userObj = await res.json();
         mutate(userObj);
-        router.replace("/feed");
+        localStorage.setItem("userId", userObj.user._id);
+        router.replace(`/feed/${localStorage.getItem("userId")}`);
       } else {
         alert(await res.text());
       }
