@@ -10,6 +10,14 @@ export async function findUserById(db, userId) {
     .then((user) => user || null);
 }
 
+//유저 itemlist 내부에서 itemId로 아이템 객체 반환하기
+export async function findItemDetail(db, userId, itemId) {
+  return db
+    .collection("users")
+    .findOne({ _id: userId })
+    .then((user) => user.itemlist.filter((el) => el.itemid === itemId));
+}
+
 //유저네임으로 유저 찾기
 export async function findUserByUsername(db, username) {
   return db
