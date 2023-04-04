@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className={classes.header}>
-      <Link href={user ? "/feed" : "/"}>
+      <Link href={user ? `/feed/${user._id}` : "/"}>
         <div className={classes.title}>
           <h1>My Dibs!</h1>
           <div className={classes.icon}>
