@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "src/hooks";
 
-export default function SignUpForm({ signUpData, setSignUpData }) {
+export default function SignUpForm() {
+  const [signUpData, setSignUpData] = useState({
+    username: "",
+    password: "",
+    passwordConfirm: "",
+  });
   const [confirmPassword, setConfirmPassword] = useState(false);
   const router = useRouter();
   const [user, { mutate }] = useCurrentUser();
@@ -53,7 +58,7 @@ export default function SignUpForm({ signUpData, setSignUpData }) {
         mutate(userObj);
         router.replace("/feed");
       } else {
-        console.log(await res.text());
+        alert(await res.text());
       }
     }
   }
