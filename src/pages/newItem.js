@@ -7,9 +7,9 @@ import ConfirmModal from "../components/modal/ConfirmModal";
 import Seo from "../components/Seo";
 import { useCurrentUser } from "src/hooks";
 import { nanoid } from "nanoid";
+import HeartRater from "src/components/newItem/HeartRater";
 
 //TODO: post 할 경우 두 개씩 생성되는 문제 고치기
-//TODO: heart score 눌러서 입력할 수 있도록 바꾸기
 //TODO: initial state가 뜨는 것 고치기
 //TODO: 이미지 로더 구현
 
@@ -94,11 +94,11 @@ export default function NewItem() {
             </div>
             <div>
               <label>Score. </label>
-              <input
+              <HeartRater
                 name="score"
-                onChange={inputHandler}
-                value={itemData.score}
-              ></input>
+                heartscore={itemData}
+                setHeartScore={setItemData}
+              />
             </div>
             <div>
               <label>Memo. </label>
