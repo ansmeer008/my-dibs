@@ -8,14 +8,19 @@ import Seo from "../components/Seo";
 import { useCurrentUser } from "src/hooks";
 import { nanoid } from "nanoid";
 import HeartRater from "src/components/newItem/HeartRater";
+import { TbPencil } from "react-icons/tb";
 
 //TODO: post 할 경우 두 개씩 생성되는 문제 고치기
 //TODO: initial state가 뜨는 것 고치기
 //TODO: 이미지 로더 구현
 
+//빈 객체인 경우는 truthy라서 카메라 아이콘 안 뜸
+
 export default function NewItem() {
   const [user] = useCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
+  //사용자에게 미리보기를 제공하기 위한 Img 상태
+  const [imgFile, setImgFile] = useState({});
   const [itemData, setItemData] = useState({
     id: user._id,
     image: "",
@@ -27,6 +32,25 @@ export default function NewItem() {
     url: "",
   });
   const router = useRouter();
+
+  const changeHandler = (e) => {
+    if (e.target.files[0].size >= 5 * 1024 * 1024) {
+      alert("파일의 크기는 최대 5MB입니다.");
+      return;
+    }
+    if (e.target.files) {
+      setImgFile(e.target.files[0]);
+      saveHandler(e.target.files[0]);
+    }
+  };
+
+  const saveHandler = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImgFile(reader.result);
+    };
+  };
 
   function inputHandler(e) {
     const { name, value } = e.target;
@@ -56,8 +80,20 @@ export default function NewItem() {
       <div className={classes.itemContiner}>
         <div className={classes.itemContents}>
           <div className={classes.imgContainer}>
-            <TbCamera />
-            <span>상품 이미지를 입력해주세요</span>
+            {imgFile ? <img src={imgFile} alt="item-img" /> : <TbCamera />}
+            <div className={classes.imgLoader}>
+              <label htmlFor="file">
+                <TbPencil />
+              </label>
+              <input
+                className={classes.imgInput}
+                type="file"
+                id="file"
+                accept="image/jpg, image/jpeg, image/png"
+                multiple={false}
+                onChange={changeHandler}
+              ></input>
+            </div>
           </div>
           <div className={classes.textContainer}>
             <div>
