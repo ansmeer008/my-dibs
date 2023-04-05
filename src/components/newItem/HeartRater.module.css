@@ -1,0 +1,4 @@
+.heart {
+  color: var(--score-pink);
+  font-size: 32px;
+}
