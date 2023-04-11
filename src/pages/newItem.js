@@ -14,8 +14,6 @@ import { TbPencil } from "react-icons/tb";
 //TODO: initial state가 뜨는 것 고치기
 //TODO: 이미지 로더 구현
 
-//빈 객체인 경우는 truthy라서 카메라 아이콘 안 뜸
-
 export default function NewItem() {
   const [user] = useCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +78,11 @@ export default function NewItem() {
       <div className={classes.itemContiner}>
         <div className={classes.itemContents}>
           <div className={classes.imgContainer}>
-            {imgFile ? <img src={imgFile} alt="item-img" /> : <TbCamera />}
+            {Object.keys(imgFile).length !== 0 ? (
+              <img src={imgFile} alt="item-img" />
+            ) : (
+              <TbCamera />
+            )}
             <div className={classes.imgLoader}>
               <label htmlFor="file">
                 <TbPencil />
