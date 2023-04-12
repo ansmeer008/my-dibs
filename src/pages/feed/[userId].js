@@ -23,7 +23,7 @@ export default function Home({ itemlist }) {
   return (
     <div className={classes.container}>
       <div className={classes.buttonContainer}>
-        <NewButton buttonHandelr={() => router.push("/newItem")} />
+        <NewButton buttonHandler={() => router.push("/newItem")} />
         <TagButton />
         <div className={classes.filterContainer}>
           <TbFilter className={classes.filterIcon} onClick={filterHandler} />

@@ -1,14 +1,14 @@
 import { ConfirmButton, DeleteButton } from "../Button";
 import classes from "./modal.module.css";
 
-export default function ConfirmModal({ handler }) {
+export default function ConfirmModal({ handler, text, setIsOpen }) {
   return (
     <div className={classes.backdrop}>
       <div className={classes.view}>
-        <span>작성을 완료하시겠습니까?</span>
+        <span>{text}</span>
         <div className={classes.buttonContainer}>
           <ConfirmButton buttonHandler={handler} />
-          <DeleteButton buttonHandelr={handler} />
+          <DeleteButton buttonHandler={setIsOpen} />
         </div>
       </div>
     </div>

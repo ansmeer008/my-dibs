@@ -1,24 +1,24 @@
 import classes from "./Button.module.css";
 
-function NewButton({ buttonHandelr }) {
+function NewButton({ buttonHandler }) {
   return (
-    <button className={classes.new} onClick={buttonHandelr}>
+    <button className={classes.new} onClick={buttonHandler}>
       New
     </button>
   );
 }
 
-function EditButton({ buttonHandelr }) {
+function EditButton({ buttonHandler }) {
   return (
-    <button className={classes.edit} onClick={buttonHandelr}>
+    <button className={classes.edit} onClick={buttonHandler}>
       Edit
     </button>
   );
 }
 
-function DeleteButton({ buttonHandelr }) {
+function DeleteButton({ buttonHandler }) {
   return (
-    <button className={classes.delete} onClick={buttonHandelr}>
+    <button className={classes.delete} onClick={buttonHandler}>
       Delete
     </button>
   );
