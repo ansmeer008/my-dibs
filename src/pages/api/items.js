@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import { all } from "../../middlewares/index";
-import { insertUser, findUserById, updateUserById } from "../../db/index";
+import { findUserById, updateUserById, findItemDetail } from "../../db/index";
 import { extractUser } from "src/lib/api-helpers";
 
 //next-connect 모듈은 nextjs에서 api라우팅을 쉽게 해주는 모듈
@@ -39,6 +39,20 @@ handler.patch(async (req, res) => {
 handler.patch(async (req, res) => {});
 
 //아이템 삭제
-handler.delete((req, res) => {});
+handler.delete(async (req, res) => {
+  const { id, itemid } = req.body;
+  if (!id) {
+    res.status(401).end();
+    return;
+  }
+
+  let user = await findUserById(req.db, id);
+  user = await updateUserById(req.db, id, {
+    ...user,
+    itemlist: user.itemlist.filter((el) => el.itemid !== itemid),
+  });
+
+  res.json({ user: extractUser(user) });
+});
 
 export default handler;

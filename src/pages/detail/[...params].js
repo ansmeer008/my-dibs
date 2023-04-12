@@ -6,9 +6,28 @@ import ItemTags from "../../components/detail/ItemTag";
 import Seo from "../../components/Seo";
 import { all } from "../../middlewares/index";
 import { findItemDetail } from "../../db/index";
+import ConfirmModal from "../../components/modal/ConfirmModal";
+import { useState } from "react";
 
 export default function Detail({ itemDetail }) {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [userId, itemId] = router.query.params;
+
+  //TODO: 삭제 로직 완료 후 feed 이동 시 삭제된 item 보이는 현상 해결 필요(새로고침 시 사라짐)
+
+  async function deleteHandler() {
+    const response = await fetch("/api/items", {
+      method: "DELETE",
+      body: JSON.stringify({ id: userId, itemid: itemId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log("this is deletedData" + data);
+    setIsOpen((prev) => !prev);
+  }
 
   return (
     <div className={classes.container}>
@@ -58,10 +77,20 @@ export default function Detail({ itemDetail }) {
           </div>
         </div>
         <div className={classes.buttonContainer}>
-          <EditButton buttonHandelr={() => router.replace("/editItem")} />
-          <DeleteButton />
+          <EditButton buttonHandler={() => router.replace("/editItem")} />
+          <DeleteButton buttonHandler={() => setIsOpen((prev) => !prev)} />
         </div>
       </div>
+      {isOpen ? (
+        <ConfirmModal
+          text="삭제하시겠습니까?"
+          setIsOpen={() => setIsOpen((prev) => !prev)}
+          handler={() => {
+            deleteHandler();
+            router.replace(`/feed/${localStorage.getItem("userId")}`);
+          }}
+        />
+      ) : null}
     </div>
   );
 }
